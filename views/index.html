@@ -1,0 +1,77 @@
+<html>
+
+    <head>
+        <title>TODO APP</title>
+        <!-- <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular.js"></script> -->
+        <script src="javascripts/angular/angular.js" type="text/javascript"></script>
+        <script src="javascripts/angular-ui-router/release/angular-ui-router.js" type="text/javascript"></script>
+        <script src="javascripts/app.js" type="text/javascript"></script>
+        <script src="javascripts/todoService.js" type="text/javascript"></script>
+        <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+        <!-- <script type="text/javascript" src="stylesheets/cssrefresh.js"></script> -->
+        <!-- <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet"> -->
+        <!-- <script src="scripts/angular-ui-router/release/angular-ui-router.js" type="text/javascript"></script>-->        
+    </head>
+    <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+    <body ng-app="todoApp">
+        <div ng-controller="mainController">
+
+            <div class="add-todo">
+                <label>New Todo</label>
+                <input class="add-input" type="text" ng-model="formData.newTodo"></input>  
+                <div class="custom-button add-button" ng-click="addTodo(0)"> ADD </div>
+            </div>
+
+        <div class="wrapper">    
+
+            <div class="col"> 
+                <label>new</label>
+                <ul ng-repeat="item in todos">
+                    <div class="single-todo" ng-if="item.Status === 0">
+                        <li>
+                            <div class="todo-info">Task: {{item.Task}}, ID: {{item.ID}} <span ng-if="item.Status === 0">Pending</span></div>
+                            <div class="action-button start-button" ng-if="item.Status === 0" ng-click="updateTodo(item.ID, 1)"> START </div>
+                            <div class="action-button finish-button" ng-if="item.Status === 0" ng-click="updateTodo(item.ID, 2)"> FINISH </div>
+                            <div class="action-button delete-button" ng-click="deleteTodo(item.ID)"> X </div>
+                        </li>
+                    </div> 
+                </ul>
+            </div>
+
+            <div class="col"> 
+                <label>in progress</label>
+                <ul ng-repeat="item in todos">
+                    <div class="single-todo" ng-if="item.Status === 1">
+                        <li>
+                            <div class="todo-info">Task: {{item.Task}}, ID: {{item.ID}} <span ng-if="item.Status === 1">In Progress</span></div>
+                            <div class="action-button finish-button" ng-if="item.Status === 1" ng-click="updateTodo(item.ID, 2)"> FINISH </div>
+                            <div class="action-button reset-button" ng-if="item.Status === 1" ng-click="updateTodo(item.ID, 0)"> RESET </div>
+                            <div class="action-button delete-button" ng-click="deleteTodo(item.ID)"> X </div>
+                        </li>
+                    </div> 
+                </ul>
+            </div>
+
+            <div class="col"> 
+                <label> done</label>
+                <ul ng-repeat="item in todos">
+                    <div class="single-todo" ng-if="item.Status === 2">
+                        <li>
+                            <div class="todo-info">Task: {{item.Task}}, ID: {{item.ID}}  <span ng-if="item.Status === 2">Done</span></div>
+                            <div class="action-button start-button" ng-if="item.Status === 2" ng-click="updateTodo(item.ID, 1)"> RESTART </div>
+                            <div class="action-button reset-button" ng-if="item.Status === 2" ng-click="updateTodo(item.ID, 0)"> RESET </div>
+                            <div class="action-button delete-button" ng-click="deleteTodo(item.ID)"> X </div>
+                        </li>
+                    </div> 
+                </ul>
+            </div> 
+        </div>
+
+
+
+
+
+                
+        </div>
+    </body>
+</html>
